@@ -1,17 +1,14 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:sqflite/sqflite.dart';
 
 class NewnotesController with ChangeNotifier {
   late Database myDatabase;
-  List<Map> tasksList = [];
+  List<Map> taskLists = [];
 
-  //----------------------------------------------------------
-
+  //---------------------------------------------------------
   Future initDb() async {
-    // Open the database
-    myDatabase = await openDatabase("notesdb.db", version: 1,
+    // open the database
+    myDatabase = await openDatabase('Taskpathdb.db', version: 1,
         onCreate: (Database db, int version) async {
       // When creating the db, create the table
       await db.execute(
@@ -19,41 +16,29 @@ class NewnotesController with ChangeNotifier {
     });
   }
 
-  //----------------------------------------------------------
-
-  Future addTask({required String title, required String task}) async {
+//---------------------------------------------------------
+  Future addTask(String title, String task) async {
     await myDatabase.rawInsert(
-        'INSERT INTO Notestable(title, task) VALUES(?, ?)', [title, task]);
+        'INSERT INTO Notestable(title, task) VALUES(?,?)', [title, task]);
     getTask();
-  }
-
-  //----------------------------------------------------------
-
-  Future getTask() async {
-    // Get the records
-    tasksList = await myDatabase.rawQuery('SELECT * FROM Notestable');
-    log(tasksList.toString());
     notifyListeners();
   }
 
-  //----------------------------------------------------------
+  Future getTask() async {
+    taskLists = await myDatabase.rawQuery('SELECT * FROM Notestable');
+    print(taskLists);
+    notifyListeners();
+  }
 
-  Future removeTask(int id) async {
+  Future removetask(int id) async {
     await myDatabase.rawDelete('DELETE FROM Notestable WHERE id = ?', [id]);
     getTask();
   }
 
-  //----------------------------------------------------------
-
-  Future editTask(
-      {required int id, required String title, required String task}) async {
+  Future updatetask(String newtitle, String newtask, int id) async {
     await myDatabase.rawUpdate(
         'UPDATE Notestable SET title = ?, task = ? WHERE id = ?',
-        [title, task, id]);
+        [newtitle, newtask, id]);
     getTask();
   }
-
-  //----------------------------------------------------------
-
-  Future closeDb() async {}
 }

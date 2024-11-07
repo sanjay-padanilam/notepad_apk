@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-
 import 'package:notepad_apk/controller/newnotes_Controller.dart';
-import 'package:notepad_apk/views/homescreen/homescreen.dart';
 
+import 'package:notepad_apk/views/homescreen/homescreen.dart';
 import 'package:provider/provider.dart';
 
 void main() {
