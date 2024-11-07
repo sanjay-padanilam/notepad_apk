@@ -62,13 +62,17 @@ class _HomescreenState extends State<Homescreen> {
                     children: [
                       Expanded(
                         child: ElevatedButton(
-                            onPressed: () {}, child: Text("cancel")),
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            child: Text("cancel")),
                       ),
                       Expanded(
                         child: ElevatedButton(
                             onPressed: () async {
                               await newnotesController1.removetask(
                                   newnotesController1.taskLists[index]["id"]);
+                              Navigator.pop(context);
                             },
                             child: Text("delete")),
                       )
