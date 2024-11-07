@@ -82,7 +82,7 @@ class _HomescreenState extends State<Homescreen> {
                   context,
                   MaterialPageRoute(
                     builder: (context) => Newnotes(
-                      appindex: index,
+                      appindex: newnotesController1.taskLists[index]["id"],
                       iseditornot: true,
                       task: newnotesController1.taskLists[index]["task"],
                       title: newnotesController1.taskLists[index]["title"],

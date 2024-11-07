@@ -154,6 +154,7 @@ class _NewnotesState extends State<Newnotes> {
             floatingActionButton: FloatingActionButton(onPressed: () async {
               await newnotesController.updatetask(
                   titlecontroller.text, taskcontroller.text, widget.appindex!);
+              newnotesController.getTask();
             })));
   }
 }
