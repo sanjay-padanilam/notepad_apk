@@ -96,6 +96,7 @@ class _HomescreenState extends State<Homescreen> {
             child: NoteCard(
               title: newnotesController1.taskLists[index]["title"],
               subtitle: newnotesController1.taskLists[index]["task"],
+              time: newnotesController1.taskLists[index]["time"],
             ),
           ),
           separatorBuilder: (context, index) => SizedBox(

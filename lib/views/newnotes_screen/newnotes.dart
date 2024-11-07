@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:notepad_apk/controller/newnotes_Controller.dart';
 
 import 'package:provider/provider.dart';
@@ -24,6 +25,7 @@ class Newnotes extends StatefulWidget {
 class _NewnotesState extends State<Newnotes> {
   TextEditingController titlecontroller = TextEditingController();
   TextEditingController taskcontroller = TextEditingController();
+  String formattedTime = DateFormat('hh:mm:a').format(DateTime.now());
 
   @override
   void initState() {
@@ -75,10 +77,9 @@ class _NewnotesState extends State<Newnotes> {
                           newnotesController.updatetask(titlecontroller.text,
                               taskcontroller.text, widget.appindex!);
                           newnotesController.getTask();
-                          // ---------------------
                         } else {
-                          await newnotesController.addTask(
-                              titlecontroller.text, taskcontroller.text);
+                          await newnotesController.addTask(titlecontroller.text,
+                              taskcontroller.text, formattedTime.toString());
                         }
 
                         Navigator.pop(context);

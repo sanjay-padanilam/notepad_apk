@@ -2,16 +2,15 @@ import 'package:flutter/material.dart';
 
 class NoteCard extends StatelessWidget {
   final String title;
-  final String? subtitle;
-  final String? time;
-  final String? date;
+  final String subtitle;
+  final String time;
+
   final bool isBookmarked;
 
   const NoteCard({
     required this.title,
-    this.subtitle,
-    this.time,
-    this.date,
+    required this.subtitle,
+    required this.time,
     this.isBookmarked = false,
   });
 
@@ -29,25 +28,10 @@ class NoteCard extends StatelessWidget {
         children: [
           Text(title,
               style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
-          if (subtitle != null) ...[
-            SizedBox(height: 4),
-            Text(subtitle!, style: TextStyle(fontSize: 18)),
-          ],
-          if (time != null) ...[
-            SizedBox(height: 8),
-            Text(time!, style: TextStyle(fontSize: 16, color: Colors.grey)),
-          ],
-          if (date != null) ...[
-            SizedBox(height: 8),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(date!, style: TextStyle(fontSize: 16, color: Colors.grey)),
-                if (isBookmarked)
-                  Icon(Icons.bookmark, color: Colors.amber, size: 20),
-              ],
-            ),
-          ],
+          SizedBox(height: 4),
+          Text(subtitle, style: TextStyle(fontSize: 18)),
+          SizedBox(height: 8),
+          Text(time, style: TextStyle(fontSize: 16, color: Colors.grey)),
         ],
       ),
     );
