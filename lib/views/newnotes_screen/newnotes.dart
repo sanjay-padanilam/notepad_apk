@@ -46,115 +46,118 @@ class _NewnotesState extends State<Newnotes> {
 
     return Consumer<NewnotesController>(
         builder: (context, newnotesController, child) => Scaffold(
-            backgroundColor: Colors.black,
-            appBar: AppBar(
               backgroundColor: Colors.black,
-              elevation: 0,
-              leading: IconButton(
-                icon: Icon(Icons.arrow_back),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-              ),
-              actions: [
-                IconButton(
-                  icon: Icon(Icons.undo),
-                  onPressed: () {},
+              appBar: AppBar(
+                backgroundColor: Colors.black,
+                elevation: 0,
+                leading: IconButton(
+                  icon: Icon(Icons.arrow_back),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
                 ),
-                IconButton(
-                  icon: Icon(Icons.redo),
-                  onPressed: () {},
-                ),
-                IconButton(
-                    icon: Icon(
-                      Icons.check,
-                      color: Colors.white,
-                    ),
-                    onPressed: () async {
-                      await newnotesController.addTask(
-                          titlecontroller.text, taskcontroller.text);
+                actions: [
+                  IconButton(
+                    icon: Icon(Icons.undo),
+                    onPressed: () {},
+                  ),
+                  IconButton(
+                    icon: Icon(Icons.redo),
+                    onPressed: () {},
+                  ),
+                  IconButton(
+                      icon: Icon(
+                        Icons.check,
+                        color: Colors.white,
+                      ),
+                      onPressed: () async {
+                        if (widget.iseditornot) {
+                          newnotesController.updatetask(titlecontroller.text,
+                              taskcontroller.text, widget.appindex!);
+                          newnotesController.getTask();
+                          // ---------------------
+                        } else {
+                          await newnotesController.addTask(
+                              titlecontroller.text, taskcontroller.text);
+                        }
 
-                      Navigator.pop(context);
-                    }),
-              ],
-            ),
-            body: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Title",
-                    style: TextStyle(
-                      fontSize: 32,
-                      fontWeight: FontWeight.bold,
-                      fontFamily: 'Cursive',
-                    ),
-                  ),
-                  SizedBox(height: 8),
-                  TextFormField(
-                    controller: titlecontroller,
-                    maxLines: null,
-                    style: TextStyle(fontSize: 18, color: Colors.white),
-                    decoration: InputDecoration(
-                      hintText: "Title...",
-                      hintStyle: TextStyle(color: Colors.grey),
-                      border: InputBorder.none,
-                    ),
-                  ),
-                  SizedBox(height: 16),
-                  TextFormField(
-                    controller: taskcontroller,
-                    maxLines: null,
-                    style: TextStyle(fontSize: 18, color: Colors.white),
-                    decoration: InputDecoration(
-                      hintText: "Start typing...",
-                      hintStyle: TextStyle(color: Colors.grey),
-                      border: InputBorder.none,
-                    ),
-                  ),
+                        Navigator.pop(context);
+                      }),
                 ],
               ),
-            ),
-            bottomNavigationBar: BottomAppBar(
-              color: Colors.black,
-              child: Padding(
+              body: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 16),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    IconButton(
-                      icon: Icon(Icons.text_format),
-                      onPressed: () {},
+                    Text(
+                      "Title",
+                      style: TextStyle(
+                        fontSize: 32,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'Cursive',
+                      ),
                     ),
-                    IconButton(
-                      icon: Icon(Icons.check_circle_outline),
-                      onPressed: () {},
+                    SizedBox(height: 8),
+                    TextFormField(
+                      controller: titlecontroller,
+                      maxLines: null,
+                      style: TextStyle(fontSize: 18, color: Colors.white),
+                      decoration: InputDecoration(
+                        hintText: "Title...",
+                        hintStyle: TextStyle(color: Colors.grey),
+                        border: InputBorder.none,
+                      ),
                     ),
-                    IconButton(
-                      icon: Icon(Icons.alarm),
-                      onPressed: () {},
-                    ),
-                    IconButton(
-                      icon: Icon(Icons.image),
-                      onPressed: () {},
-                    ),
-                    IconButton(
-                      icon: Icon(Icons.mic),
-                      onPressed: () {},
-                    ),
-                    IconButton(
-                      icon: Icon(Icons.more_vert),
-                      onPressed: () {},
+                    SizedBox(height: 16),
+                    TextFormField(
+                      controller: taskcontroller,
+                      maxLines: null,
+                      style: TextStyle(fontSize: 18, color: Colors.white),
+                      decoration: InputDecoration(
+                        hintText: "Start typing...",
+                        hintStyle: TextStyle(color: Colors.grey),
+                        border: InputBorder.none,
+                      ),
                     ),
                   ],
                 ),
               ),
-            ),
-            floatingActionButton: FloatingActionButton(onPressed: () async {
-              await newnotesController.updatetask(
-                  titlecontroller.text, taskcontroller.text, widget.appindex!);
-              newnotesController.getTask();
-            })));
+              bottomNavigationBar: BottomAppBar(
+                color: Colors.black,
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      IconButton(
+                        icon: Icon(Icons.text_format),
+                        onPressed: () {},
+                      ),
+                      IconButton(
+                        icon: Icon(Icons.check_circle_outline),
+                        onPressed: () {},
+                      ),
+                      IconButton(
+                        icon: Icon(Icons.alarm),
+                        onPressed: () {},
+                      ),
+                      IconButton(
+                        icon: Icon(Icons.image),
+                        onPressed: () {},
+                      ),
+                      IconButton(
+                        icon: Icon(Icons.mic),
+                        onPressed: () {},
+                      ),
+                      IconButton(
+                        icon: Icon(Icons.more_vert),
+                        onPressed: () {},
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ));
   }
 }
